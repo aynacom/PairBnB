@@ -1,4 +1,59 @@
 <h1>Main#index</h1>
-<p>Find me in app/views/main/index.html.erb</p>
-<p> Welcome <strong> <%=current_user.first_name+' '+ current_user.last_name%></strong> to your home page!</p>
+<%#byebug%>
+<% if signed_in? %>
+<p> Welcome <strong> <%=current_user.first_name%> </strong> to your home page!</p>
+<%= link_to 'My Listings', user_listings_path(current_user) %> || <%= link_to 'Other Listings', main_all_path %>|| <%= link_to 'My Reservations',user_listing_reservations_path(current_user.id,'0') %>
+<!-- the 0 is just a dummy listing_id -->
 
+<!-- Listing.where("state LIKE ?","%#{'New'}%") -->
+
+
+<div>
+	
+	<!-- <img src="<%=current_user.photo%>" alt="View from my balcony, showing a row of houses, trees and a castle" height="42" width="42"> -->
+	<%= image_tag current_user.photo_url(:thumb).to_s %>
+	<!-- you can remove thumb to display the bigger version -->
+
+	<%= form_for current_user, :html => {:multipart => true} do |f| %>
+  <p>
+    <%= f.file_field :photo %>
+  </p>
+  <p>
+  	<%= f.label :remote_photo_url, "or photo URL" %>
+    <%= f.text_field :remote_photo_url %>
+
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+
+
+</div>
+
+<div>
+  <!-- Listing.where("state LIKE ?","%#{'New'}%") -->
+ 
+
+<%= form_tag(main_all_path, method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+</div>
+
+<%='Reservations for my Listings:' %><br>
+<% @listings.each do |listing| %>
+<%if !listing.reservations.ids.empty?%>
+Address: <%=listing.address %> ///  Price per night: <%=listing.price_per_night %> /// <br> 
+
+  ---> Reserved in: <%=listing.reservations.each do |res|%><%end%>
+  <br>
+  <%end%>
+
+<%end%>
+
+
+
+<% else %>
+  <%= link_to "Sign in", sign_in_path %>
+<% end %>

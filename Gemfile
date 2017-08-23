@@ -5,6 +5,46 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+#for background jobs -queue
+gem 'sidekiq'
+# Preview email in the default browser instead of sending it.
+gem "letter_opener", :group => :development
+
+#Bootstrap
+gem 'sass-rails', '~> 5.0'    
+gem 'bootstrap-sass', '~> 3.3.6'
+#for payment
+gem 'braintree'
+
+#Sinatra -- Remove it afterwards
+gem "sinatra"
+
+# Handling http requests:
+gem "rest-client"
+
+#To use google cloud # gem "fog"
+gem "fog-google"
+gem "google-api-client", "> 0.8.5", "< 0.9"
+gem "mime-types"
+
+# for image processing
+gem "mini_magick"
+# for uploading photos
+gem 'carrierwave', '~> 1.0'
+#pagination
+gem 'kaminari'
+
+# seeding database with fake data
+gem 'faker'
+
+# to sign-up using FB
+gem 'omniauth-facebook'
+gem 'omniauth'
+
+# to protect configuration variables
+gem "figaro"
+
 # User management gem
 gem "clearance"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

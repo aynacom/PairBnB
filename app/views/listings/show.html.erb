@@ -1,0 +1,71 @@
+SHOW LISTING<br>
+<p align="center"><%=link_to "BOOK NOW!", new_user_listing_reservation_path(current_user.id,@listing.id)  %></p>
+<p>
+	<strong>Country:</strong>
+	<%=@listing.country%>
+</p>
+<p>
+	<strong>State:</strong>
+	<%=@listing.state%>
+</p>
+<p>
+	<strong>City:</strong>
+	<%=@listing.city%>
+</p>
+<p>
+	<strong>Address:</strong>
+	<%=@listing.address%>
+</p>
+<p>
+	<strong>Zip Code:</strong>
+	<%=@listing.zipcode%>
+</p>
+<p>
+	<strong>Price/night:</strong>
+	<%=@listing.price_per_night%>
+</p>
+<p>
+	<strong>Tags:</strong>
+	<%=@listing.tags%>
+</p>
+<p>
+	<strong>Host:</strong>
+	<%=@host.first_name+' '+@host.last_name%>
+</p>
+<p>
+	<strong>Property Name:</strong>
+	<%=@listing.name%>
+</p>
+<p>
+	<strong>Description:</strong>
+	<%=@listing.description%>
+</p>
+<p>
+	<strong>Place Type:</strong>
+	<%=@listing.place_type%>
+</p>
+<p>
+	<strong>Property Type:</strong>
+	<%=@listing.property_type%>
+</p>
+<p>
+	<strong>Number of Rooms:</strong>
+	<%=@listing.room_number%>
+</p>
+<p>
+	<strong>Number of Beds:</strong>
+	<%=@listing.bed_number%>
+</p>
+<p>
+	<strong>Verification:</strong>
+	<%=@listing.verification%>
+</p>
+<p>
+	<strong>Photos:</strong>
+	<%@listing.photos.each do |photo|%>
+	<%= image_tag photo.url.to_s %>
+	<!-- <img src="<%=photo.url%>"> -->
+	
+	<%#byebug%>
+	<%end%>
+</p>

@@ -1,0 +1,18 @@
+<%= link_to "New Listing", new_user_listing_path %>
+
+<br>
+<% @listings.each do |listing| %>
+<%#byebug%>
+Address: <%=listing.address %> ///  Price per night: <%=listing.price_per_night %> ///  Tags: <%=listing.tags %> ///  <%=link_to "Edit", edit_user_listing_path(current_user, listing)  %>|| <%=link_to "Delete",[current_user,listing], method: :delete, data: {confirm: "Sure?"}  %><br> 
+	<%listing.photos.each do |photo|%>
+	<%= image_tag photo.url(:thumb).to_s %>
+
+	<!-- <img src="<%=photo.url%>"> -->
+	
+	<%#byebug%>
+	<%end%>
+	---> Reserved in: <%=listing.reservations.each do |res|%><%end%>
+	<br>
+
+
+<%end%>

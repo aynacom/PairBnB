@@ -39,7 +39,7 @@ class Clearance::PasswordsController < Clearance::BaseController
   end
 
   def new
-    render template: 'passwords/new'
+    render template: 'passwords/new', :layout => false
   end
 
   def update

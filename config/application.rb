@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module PairBnb
   class Application < Rails::Application
+
+  	# Make sidekiq as the default active_job queuing add-on
+  config.active_job.queue_adapter = :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 

@@ -10,8 +10,9 @@ class Clearance::UsersController < Clearance::BaseController
   end
 
   def new
+     
     @user = user_from_params
-    render template: "users/new"
+    render template: "users/new", :layout => false
   end
 
   def create
@@ -20,13 +21,44 @@ class Clearance::UsersController < Clearance::BaseController
 
     if @user.save
       sign_in @user
+      # Tell the UserMailer to send a welcome email after save
+      UserMailer.welcome_email(@user).deliver_later
+      # If you want to send emails right away (from a cronjob for example) just call deliver_now:
       redirect_back_or url_after_create
     else
       render template: "users/new"
     end
   end
 
+  def edit
+      render template: "users/edit"
+
+
+  end
+
+  def show
+     render template: "users/show"
+      # byebug
+     # redirect_to main_index_path
+  end
+
+  def index
+    # byebug
+    redirect_to main_index_path
+  end
+
+  def update
+    # byebug
+    @user=User.find(params[:id])
+    @user.update(update_user_params)
+    redirect_to main_index_path
+  end
+  
   private
+
+  def update_user_params
+    params.require(:user).permit(:photo, :remote_photo_url)
+  end
 
   def avoid_sign_in
     warn "[DEPRECATION] Clearance's `avoid_sign_in` before_filter is " +
