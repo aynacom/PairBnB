@@ -1,0 +1,30 @@
+#NEW RESERVATION#
+
+<% if @reservation.errors.any? %>
+<h4><%=pluralize(@reservation.errors.count,'error')%> prevented us from making your reservation:</h4>
+<ul>
+	<% @reservation.errors.full_messages.each do |msg| %>
+	<li> <%= msg %> </li>
+	<% end %>
+</ul>
+<% end %>
+
+
+<!-- <p>Check In:<br> <input type="text" id="check_in"></p> -->
+<!-- <p>Check Out:<br> <input type="text" id="check_out"></p> -->
+<br><br>
+<%=form_for ([current_user, @listing, @listing.reservations.build]) do |f| %>
+<p>
+	<%=f.label :check_in_date%>
+	<%= f.date_field :check_in_date %>
+</p>
+<p>
+	<%=f.label :check_out%>
+	<%= f.date_field :check_out %>
+</p>
+<%=f.hidden_field :user_id, value: current_user.id%>
+<p>
+	<%=f.submit "Book Now!"%>
+</p>
+<%end%>
+

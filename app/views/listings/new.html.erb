@@ -1,0 +1,24 @@
+<br>
+
+<%= form_for([current_user, current_user.listings.build], :html => {:multipart => true}) do |f| %>
+<p>
+<%=f.label :address %><br>
+<%=f.text_area :address %>
+</p>
+<p>
+<%=f.label :price_per_night %><br>
+<%=f.text_field :price_per_night%>
+</p>
+<p>
+<%=f.label :tags%><br>
+<%=f.text_field :tags%>
+</p>
+<p>
+    <%= f.file_field :photos, multiple: true%>
+  </p>
+
+<p>
+<%=f.submit%>	
+</p>
+<%end%>
+

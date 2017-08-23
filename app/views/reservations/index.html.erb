@@ -1,0 +1,22 @@
+"RESERVATIONS#INDEX"
+<br>
+<%#byebug%>
+<table border="1">
+	<thead>
+		<th>Listing Name</th>
+		<th>City</th>
+		<th>Check in</th>
+		<th>Check out</th>
+	</thead>
+<%@reservations.each do |res| %>
+	<tbody>
+	<%#byebug%>
+		<td><%=link_to res.listing.name,user_listing_path(res.listing.user,res.listing.id)%></td>
+		<td> <%=res.listing.city%></td>
+		<td><%=res.check_in_date%></td>
+		<td><%=res.check_out%></td>
+		
+	</tbody>
+<%end%>
+<%= paginate @reservations %>
+</table>

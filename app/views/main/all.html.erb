@@ -1,0 +1,50 @@
+
+<table border="1">
+	<thead>
+		<th>Show</th>
+		<th><a href="?order=country&dec=<%=$des%>">Country</a></th>
+		<th><a href="?order=state">State</a></th>
+		<th>City</th>
+		<th>Address</th>
+		<th>Zip Code</th>
+		<th>Name</th>
+		<th>Place Type</th>
+		<th>Property Type</th>
+		<th># Rooms</th>
+		<th># Beds</th>
+		<th># Guests</th>
+		<th>Description</th>
+		<th>Price/night</th>
+		<th>Verification</th>
+
+	</thead>
+<%@listings.each do |lis| %>
+	<tbody>
+	<%#byebug%>
+		<td><%=link_to "Show", user_listing_path(lis.user,lis.id)%></td>
+		<td> <%=lis.country%></td>
+		<td><%=lis.state%></td>
+		<td><%=lis.city%></td>
+		<td><%=lis.address%></td>
+		<td><%=lis.zipcode%></td>
+		<td><%=lis.name%></td>
+		<td><%=lis.place_type%></td>
+		<td><%=lis.property_type%></td>
+		<td><%=lis.room_number%></td>
+		<td><%=lis.bed_number%></td>
+		<td><%=lis.guest_number%></td>
+		<td><%=lis.description%></td>
+		<td><%=lis.price_per_night%></td>
+		<td><% if lis.verification%>
+			<%='Verified!'%>
+			<%elsif !lis.verification&&current_user.superadmin?%>
+			<a href="?verify=true&id=<%=lis.id%>">VERIFY!</a>
+			<%else%>
+			<%='Pending!'%>
+			<%end%>
+		</td>
+	</tbody>
+<%end%>
+<%= paginate @listings %>
+</table>
+
